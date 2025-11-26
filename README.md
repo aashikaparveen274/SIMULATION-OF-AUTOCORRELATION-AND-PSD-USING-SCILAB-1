@@ -47,6 +47,47 @@ Verify the generated waveform using Tabulation and Model Waveform
 
 __PROGRAM:__
 
+```
+clear all;
+close;
+
+t = 0:0.01:%pi*2;
+x = sin(2*t);
+
+
+subplot(3,2,1);
+plot(t, x);
+title('Original Signal');
+
+au = xcorr(x, x);
+subplot(3,2,2);
+plot(au);
+title('Autocorrelation');
+
+
+v = fft(au);
+subplot(3,2,3);
+plot(abs(v));
+title('FFT of Autocorrelation');
+
+
+fw = fft(x);
+subplot(3,2,4);
+plot(abs(fw));
+title('FFT of Original Signal');
+
+
+fw2 = (abs(fw)).^2;
+subplot(3,2,5);
+plot(fw2);
+title('Power Spectrum');
+```
+
 __OUTPUT:__
 
+<img width="1007" height="501" alt="image" src="https://github.com/user-attachments/assets/6dd81a0a-5724-4675-b217-d558f94635e8" />
+
+
 __RESULT:__
+
+The autocorrelation function of the signal was successfully computed and plotted. The Power Spectral Density (PSD) obtained from the FFT of the autocorrelation verified the Wiener-Khinchin relation.
